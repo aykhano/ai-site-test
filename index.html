@@ -1,126 +1,807 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="az">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LinQva - Sadə Nümunə Sayt</title>
-  <meta name="description" content="HTML / CSS / JS sadə nümunə sayt" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinQva - Veb Sayt Nümunəsi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --accent: #4f46e5;
+            --accent-hover: #4338ca;
+            --muted: #6b7280;
+            --muted-light: #9ca3af;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --success: #10b981;
+            --error: #ef4444;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+        
+        * { box-sizing: border-box; }
+        html, body { height: 100%; margin: 0; padding: 0; }
+        
+        body {
+            background: var(--bg);
+            color: #111827;
+            line-height: 1.5;
+            padding: 0;
+        }
+        
+        /* Navbar styles */
+        .nav {
+            max-width: 1100px;
+            margin: 16px auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 0 16px;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+        }
+        
+        .brand .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--accent), #06b6d4);
+            display: inline-block;
+        }
+        
+        .menu {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+        
+        .menu a {
+            color: var(--muted);
+            text-decoration: none;
+            padding: 8px 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .menu a:hover {
+            background: #eef2ff;
+            color: var(--accent);
+        }
+        
+        .menu a.active {
+            background: #eef2ff;
+            color: var(--accent);
+        }
+        
+        .cta {
+            background: var(--accent);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        
+        .cta:hover {
+            background: var(--accent-hover);
+        }
+        
+        /* Page content styles */
+        .page {
+            display: none;
+            padding: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        /* Hero section */
+        .hero {
+            margin: 32px auto;
+            padding: 32px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.6), transparent);
+            border-radius: 12px;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 32px;
+            align-items: center;
+        }
+        
+        .hero h1 {
+            font-size: 32px;
+            margin: 0 0 10px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            margin: 0 0 18px;
+            color: var(--muted);
+            font-size: 18px;
+        }
+        
+        .features {
+            display: grid;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        
+        .card {
+            background: var(--card);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(15,23,42,0.1);
+        }
+        
+        .preview {
+            padding: 20px;
+            border-radius: 8px;
+            background: linear-gradient(180deg, #fff, #fbfdff);
+            text-align: center;
+        }
+        
+        .preview img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        
+        .grid {
+            margin: 32px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 24px;
+        }
+        
+        .contact {
+            margin: 32px auto;
+            padding: 32px;
+            border-radius: 12px;
+            background: linear-gradient(180deg, #fff, #f7fbff);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e6e9ef;
+            font-family: inherit;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        
+        button {
+            background: var(--accent);
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        
+        button:hover {
+            background: var(--accent-hover);
+        }
+        
+        button:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+        
+        /* Footer styles */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--muted);
+            background: var(--card);
+            margin-top: 60px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 16px;
+        }
+        
+        .social-links a {
+            color: var(--muted);
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+        }
+        
+        /* Pricing page styles */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+        
+        .pricing-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .pricing-card.featured {
+            border: 2px solid var(--accent);
+            transform: scale(1.03);
+        }
+        
+        .price {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        
+        .currency {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        .amount {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 0 5px;
+        }
+        
+        .period {
+            font-size: 16px;
+            color: var(--muted);
+        }
+        
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px;
+        }
+        
+        .features-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f1f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .features-list .fa-check {
+            color: var(--success);
+            margin-right: 10px;
+        }
+        
+        .features-list .fa-times {
+            color: var(--error);
+            margin-right: 10px;
+        }
+        
+        .pricing-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+        
+        .pricing-btn:hover {
+            background: var(--accent-hover);
+        }
+        
+        /* Rules page styles */
+        .rules-content {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .rule-section {
+            margin-bottom: 40px;
+        }
+        
+        .rule-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .rule-section h2 {
+            color: var(--accent);
+            margin-bottom: 16px;
+            font-size: 24px;
+        }
+        
+        .rule-section p {
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        
+        .rule-section ul {
+            padding-left: 20px;
+        }
+        
+        .rule-section li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        /* Mobile menu button */
+        #menuToggle {
+            display: none;
+            background: none;
+            border: 1px solid #e6e9ef;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 880px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            
+            .menu {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: var(--card);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+                z-index: 100;
+            }
+            
+            .menu.open {
+                display: flex;
+            }
+            
+            .preview {
+                order: 2;
+            }
+            
+            #menuToggle {
+                display: flex;
+            }
+            
+            .form-row {
+                flex-direction: column;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .hero {
+                padding: 20px 16px;
+            }
+            
+            .hero h1 {
+                font-size: 26px;
+            }
+            
+            .contact {
+                padding: 20px 16px;
+            }
+            
+            .rules-content {
+                padding: 20px;
+            }
+            
+            .rule-section h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="brand">
+            <span class="logo" aria-hidden="true"></span>
+            <span>LinQva</span>
+        </div>
 
-  <nav class="nav">
-    <div class="brand">
-      <span class="logo" aria-hidden="true"></span>
-      <span>LinQva</span>
+        <div class="menu" id="menu">
+            <a href="#" class="nav-link active" data-page="home">Ana Səhifə</a>
+            <a href="#" class="nav-link" data-page="pricing">Qiymətlər</a>
+            <a href="#" class="nav-link" data-page="rules">Qaydalar</a>
+            <a href="#" class="nav-link" data-page="contact">Əlaqə</a>
+        </div>
+
+        <button id="menuToggle" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <header class="hero">
+            <div>
+                <h1>Sadə, təmiz və sürətli veb-sayt nümunəsi</h1>
+                <p>Bu nümunə səhifə HTML, CSS və JavaScript-in əsas funksiyalarını göstərir. Nümunəni kopyalayıb yapışdırın, öz tələblərinizə uyğun redaktə edin.</p>
+
+                <div class="features">
+                    <div class="card">
+                        <strong>Responsiv dizayn</strong>
+                        <div style="color:var(--muted);font-size:14px">Mobil və masaüstü üçün hazırlanmış gridlər.</div>
+                    </div>
+
+                    <div class="card">
+                        <strong>İnteqrasiya olunmuş JS</strong>
+                        <div style="color:var(--muted);font-size:14px">Sadə menyu, forma yoxlaması və dinamik davranış.</div>
+                    </div>
+
+                    <div class="card">
+                        <strong>Soft UI</strong>
+                        <div style="color:var(--muted);font-size:14px">Təmiz kölgələr və yumşaq radiuslar.</div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="preview card">
+                <h3>Mini preview</h3>
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='300'><rect width='100%' height='100%' fill='%23eef2ff'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%234f46e5' font-family='Arial' font-size='24'>Sayt Preview</text></svg>" alt="preview" />
+                <p style="color:var(--muted);font-size:13px;margin-top:8px">Sadə təqdimat</p>
+            </aside>
+        </header>
+
+        <main>
+            <section class="grid">
+                <article class="card">
+                    <div style="font-size:24px;color:var(--accent);margin-bottom:10px;"><i class="fas fa-cubes"></i></div>
+                    <h4>Komponentlər</h4>
+                    <p style="color:var(--muted);font-size:14px">Kartlar, grid, forma elementləri və reaktiv menyu burada göstərilib.</p>
+                </article>
+
+                <article class="card">
+                    <div style="font-size:24px;color:var(--accent);margin-bottom:10px;"><i class="fas fa-bolt"></i></div>
+                    <h4>Yüngül Animasiya</h4>
+                    <p style="color:var(--muted);font-size:14px">Hover effektləri və kölgələr UX üçün kifayətdir.</p>
+                </article>
+
+                <article class="card">
+                    <div style="font-size:24px;color:var(--accent);margin-bottom:10px;"><i class="fas fa-search"></i></div>
+                    <h4>Sadə SEO</h4>
+                    <p style="color:var(--muted);font-size:14px">Təmiz HTML struktur, başlıqlar və meta etiketlər.</p>
+                </article>
+
+                <article class="card">
+                    <div style="font-size:24px;color:var(--accent);margin-bottom:10px;"><i class="fas fa-expand-arrows-alt"></i></div>
+                    <h4>Asan genişləndirmə</h4>
+                    <p style="color:var(--muted);font-size:14px">Bu şablonu istədiyiniz CMS və ya backend ilə genişləndirə bilərsiniz.</p>
+                </article>
+            </section>
+        </main>
     </div>
 
-    <div class="menu" id="menu">
-      <a href="#features">Xüsusiyyətlər</a>
-      <a href="#pricing">Qiymətlər</a>
-      <a href="#contact">Əlaqə</a>
-      <a class="cta" href="#">Qaydalar</a>
+    <!-- Pricing Page -->
+    <div id="pricing" class="page">
+        <header class="hero">
+            <div>
+                <h1>Qiymət Paketlərimiz</h1>
+                <p>Ehtiyaclarınıza uyğun qiymət paketimizi seçin. Bütün paketlərə 14 günlük pulsuz sınaq müddəti daxildir.</p>
+            </div>
+        </header>
+
+        <main>
+            <section class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Başlanğıc</h3>
+                        <div class="price">
+                            <span class="currency">₼</span>
+                            <span class="amount">19</span>
+                            <span class="period">/aylıq</span>
+                        </div>
+                    </div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> 5 GB Saxlama</li>
+                        <li><i class="fas fa-check"></i> 10 istifadəçi</li>
+                        <li><i class="fas fa-check"></i> 24/7 Dəstək</li>
+                        <li><i class="fas fa-times"></i> İrəli səviyyəli analitika</li>
+                        <li><i class="fas fa-times"></i> Xüsusi inteqrasiyalar</li>
+                    </ul>
+                    <button class="pricing-btn">Paketi Seç</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="pricing-header">
+                        <h3>Professional</h3>
+                        <div class="price">
+                            <span class="currency">₼</span>
+                            <span class="amount">49</span>
+                            <span class="period">/aylıq</span>
+                        </div>
+                    </div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> 50 GB Saxlama</li>
+                        <li><i class="fas fa-check"></i> 50 istifadəçi</li>
+                        <li><i class="fas fa-check"></i> Prioritet dəstək</li>
+                        <li><i class="fas fa-check"></i> İrəli səviyyəli analitika</li>
+                        <li><i class="fas fa-times"></i> Xüsusi inteqrasiyalar</li>
+                    </ul>
+                    <button class="pricing-btn">Paketi Seç</button>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Enterprise</h3>
+                        <div class="price">
+                            <span class="currency">₼</span>
+                            <span class="amount">99</span>
+                            <span class="period">/aylıq</span>
+                        </div>
+                    </div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Limitsiz Saxlama</li>
+                        <li><i class="fas fa-check"></i> Limitsiz istifadəçi</li>
+                        <li><i class="fas fa-check"></i> 24/7 Prioritet dəstək</li>
+                        <li><i class="fas fa-check"></i> İrəli səviyyəli analitika</li>
+                        <li><i class="fas fa-check"></i> Xüsusi inteqrasiyalar</li>
+                    </ul>
+                    <button class="pricing-btn">Paketi Seç</button>
+                </div>
+            </section>
+        </main>
     </div>
 
-    <button id="menuToggle" aria-expanded="false">
-      <i class="fas fa-bars"></i>
-    </button>
-  </nav>
+    <!-- Rules Page -->
+    <div id="rules" class="page">
+        <header class="hero">
+            <div>
+                <h1>İstifadəçi Qaydaları</h1>
+                <p>Xidmətlərimizdən istifadə etməzdən əvvəl istifadəçi qaydalarımızı diqqətlə oxuyun.</p>
+            </div>
+        </header>
 
-  <header class="hero">
-    <div>
-      <h1>Sadə, təmiz və sürətli veb-sayt nümunəsi</h1>
-      <p>Bu nümunə səhifə HTML, CSS və JavaScript-in əsas funksiyalarını göstərir. Nümunəni kopyalayıb yapışdırın, öz tələblərinizə uyğun redaktə edin.</p>
+        <main>
+            <section class="rules-content">
+                <article class="rule-section">
+                    <h2>1. Xidmət Şərtləri</h2>
+                    <p>LinQva veb-saytına daxil olmaqla və ya xidmətlərimizdən istifadə etməklə, bu qaydaları qəbul etmiş sayılırsınız. Əgər bu qaydalarla razı deyilsinizsə, xidmətlərimizdən istifadə etməyin.</p>
+                </article>
 
-      <div class="features">
-        <div class="card">
-          <strong>Responsiv dizayn</strong>
-          <div style="color:var(--muted);font-size:14px">Mobil və masaüstü üçün hazırlanmış gridlər.</div>
-        </div>
+                <article class="rule-section">
+                    <h2>2. Hesab Məsuliyyəti</h2>
+                    <p>Qeydiyyat zamanı dəqiq və tam məlumat təqdim etməyiniz tələb olunur. Hesab məlumatlarınızın məxfiliyindən özünüz məsulsunuz.</p>
+                    <ul>
+                        <li>Şəxsi hesabınızı başqaları ilə paylaşmayın</li>
+                        <li>Şifrənizi müntəzəm olaraq yeniləyin</li>
+                        <li>Şübhəli fəaliyyət aşkarlanarsa, dərhal bizə məlumat verin</li>
+                    </ul>
+                </article>
 
-        <div class="card">
-          <strong>İnteqrasiya olunmuş JS</strong>
-          <div style="color:var(--muted);font-size:14px">Sadə menyu, forma yoxlaması və dinamik davranış.</div>
-        </div>
+                <article class="rule-section">
+                    <h2>3. Məzmun Qaydaları</h2>
+                    <p>Xidmətimizdə aşağıdakı məzmunları yerləşdirmək qadağandır:</p>
+                    <ul>
+                        <li>Qanunsuz və ya zərərli məzmun</li>
+                        <li>Zorakılığı təşviq edən materiallar</li>
+                        <li>Nəfret sözləri və təhqiredici dil</li>
+                        <li>Spam və təkrarlanan məzmun</li>
+                        <li>Müəllif hüquqlarını pozan materiallar</li>
+                    </ul>
+                </article>
 
-        <div class="card">
-          <strong>Soft UI</strong>
-          <div style="color:var(--muted);font-size:14px">Təmiz kölgələr və yumşaq radiuslar.</div>
-        </div>
-      </div>
+                <article class="rule-section">
+                    <h2>4. Məxfilik Siyasəti</h2>
+                    <p>Məxfilik siyasətimiz şəxsi məlumatlarınızı necə topladığımız, istifadə etdiyimiz və qoruduğumuz haqqında məlumat verir.</p>
+                </article>
+            </section>
+        </main>
     </div>
 
-    <aside class="preview card">
-      <h3>Mini preview</h3>
-      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='300'><rect width='100%' height='100%' fill='%23eef2ff'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%234f46e5' font-family='Arial' font-size='24'>Sayt Preview</text></svg>" alt="preview" />
-      <p style="color:var(--muted);font-size:13px;margin-top:8px">Sadə təqdimat</p>
-    </aside>
-  </header>
+    <!-- Contact Page -->
+    <div id="contact" class="page">
+        <header class="hero">
+            <div>
+                <h1>Bizimlə Əlaqə</h1>
+                <p>Aşağıdakı formu doldurun, demo üçün əlaqə saxlayarıq.</p>
+            </div>
+        </header>
 
-  <main>
-    <section class="grid" id="features">
-      <article class="card">
-        <div style="font-size:24px;color:var(--accent);margin-bottom:10px;"><i class="fas fa-cubes"></i></div>
-        <h4>Komponentlər</h4>
-        <p style="color:var(--muted);font-size:14px">Kartlar, grid, forma elementləri və reaktiv menyu burada göstərilib.</p>
-      </article>
-
-      <article class="card">
-        <div style="font-size:24px;color:var(--accent);margin-bottom:10px;"><i class="fas fa-bolt"></i></div>
-        <h4>Yüngül Animasiya</h4>
-        <p style="color:var(--muted);font-size:14px">Hover effektləri və kölgələr UX üçün kifayətdir.</p>
-      </article>
-
-      <article class="card">
-        <div style="font-size:24px;color:var(--accent);margin-bottom:10px;"><i class="fas fa-search"></i></div>
-        <h4>Sadə SEO</h4>
-        <p style="color:var(--muted);font-size:14px">Təmiz HTML struktur, başlıqlar və meta etiketlər.</p>
-      </article>
-
-      <article class="card">
-        <div style="font-size:24px;color:var(--accent);margin-bottom:10px;"><i class="fas fa-expand-arrows-alt"></i></div>
-        <h4>Asan genişləndirmə</h4>
-        <p style="color:var(--muted);font-size:14px">Bu şablonu istədiyiniz CMS və ya backend ilə genişləndirə bilərsiniz.</p>
-      </article>
-    </section>
-
-    <section class="contact card" id="contact">
-      <h3>Bizimlə əlaqə</h3>
-      <p style="color:var(--muted);font-size:14px">Aşağıdakı formu doldurun, demo üçün əlaqə saxlayarıq.</p>
-
-      <form id="contactForm">
-        <div class="form-row">
-          <input type="text" id="name" placeholder="Adınız" required />
-          <input type="email" id="email" placeholder="E-poçt" required />
-        </div>
-        <div style="margin-bottom:16px">
-          <textarea id="message" rows="4" placeholder="Mesajınız" required></textarea>
-        </div>
-        <div style="display:flex;gap:12px;align-items:center">
-          <button type="submit">Göndər</button>
-          <div id="formStatus" style="color:var(--muted);font-size:14px"></div>
-        </div>
-      </form>
-    </section>
-  </main>
-
-  <footer>
-    <div style="max-width:1100px;margin:0 auto;padding:8px">
-      © 2025 LinQva — Bütün hüquqlar qorunur
-      <div class="social-links">
-        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-      </div>
+        <main>
+            <section class="contact card">
+                <form id="contactForm">
+                    <div class="form-row">
+                        <input type="text" id="name" placeholder="Adınız" required />
+                        <input type="email" id="email" placeholder="E-poçt" required />
+                    </div>
+                    <div style="margin-bottom:16px">
+                        <textarea id="message" rows="4" placeholder="Mesajınız" required></textarea>
+                    </div>
+                    <div style="display:flex;gap:12px;align-items:center">
+                        <button type="submit">Göndər</button>
+                        <div id="formStatus" style="color:var(--muted);font-size:14px"></div>
+                    </div>
+                </form>
+            </section>
+        </main>
     </div>
-  </footer>
 
-  <div class="back-to-top" id="backToTop">
-    <i class="fas fa-arrow-up"></i>
-  </div>
+    <!-- Footer -->
+    <footer>
+        <div style="max-width:1100px;margin:0 auto;padding:8px">
+            © 2025 LinQva — Bütün hüquqlar qorunur
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
 
-  <script src="script.js"></script>
+    <script>
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            const menuToggle = document.getElementById('menuToggle');
+            const menu = document.getElementById('menu');
+            
+            // Menu toggle functionality
+            menuToggle.addEventListener('click', () => {
+                const isOpen = menu.classList.toggle('open');
+                menuToggle.setAttribute('aria-expanded', String(isOpen));
+                
+                // Change icon based on menu state
+                const icon = menuToggle.querySelector('i');
+                if (isOpen) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            // Page navigation
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetPage = this.getAttribute('data-page');
+                    
+                    // Hide all pages
+                    pages.forEach(page => {
+                        page.classList.remove('active');
+                    });
+                    
+                    // Show target page
+                    document.getElementById(targetPage).classList.add('active');
+                    
+                    // Update active link
+                    navLinks.forEach(navLink => {
+                        navLink.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Close mobile menu if open
+                    if (menu.classList.contains('open')) {
+                        menu.classList.remove('open');
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                        const icon = menuToggle.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                    
+                    // Scroll to top
+                    window.scrollTo(0, 0);
+                });
+            });
+            
+            // Form handling
+            const form = document.getElementById('contactForm');
+            const status = document.getElementById('formStatus');
+            
+            if (form) {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const name = document.getElementById('name').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const message = document.getElementById('message').value.trim();
+
+                    if (!name || !email || !message) {
+                        status.textContent = 'Zəhmət olmasa bütün xanaları doldurun.';
+                        return;
+                    }
+                    
+                    // Very basic email check
+                    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+                        status.textContent = 'Düzgün e-poçt daxil edin.';
+                        return;
+                    }
+
+                    // Simulate send
+                    status.textContent = 'Göndərilir...';
+                    const submitBtn = form.querySelector('button[type="submit"]');
+                    submitBtn.disabled = true;
+                    
+                    setTimeout(() => {
+                        status.textContent = 'Mesajınız göndərildi — təşəkkürlər!';
+                        form.reset();
+                        submitBtn.disabled = false;
+                    }, 1500);
+                });
+            }
+            
+            // Pricing buttons
+            const pricingButtons = document.querySelectorAll('.pricing-btn');
+            pricingButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const plan = this.parentElement.querySelector('h3').textContent;
+                    alert(`"${plan}" paketi seçildi. Təşəkkürlər!`);
+                    
+                    // Navigate to contact page
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    document.querySelector('[data-page="contact"]').classList.add('active');
+                    
+                    pages.forEach(page => page.classList.remove('active'));
+                    document.getElementById('contact').classList.add('active');
+                });
+            });
+        });
+    </script>
 </body>
 </html>

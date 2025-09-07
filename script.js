@@ -165,3 +165,35 @@
     if(e.key === 'Tab') document.documentElement.style.scrollBehavior = 'smooth';
   });
 })();
+// Pricing page functionality
+document.querySelectorAll('.pricing-btn').forEach(button => {
+  button.addEventListener('click', function() {
+    const plan = this.parentElement.querySelector('h3').textContent;
+    showNotification(`"${plan}" paketi seçildi. Yönləndirilirsiniz...`, 'success');
+    
+    // Simulate redirect to signup page
+    setTimeout(() => {
+      window.location.href = 'index.html#contact';
+    }, 2000);
+  });
+});
+
+// Update main menu links in all pages
+function updateMenuLinks() {
+  const currentPage = window.location.pathname.split('/').pop();
+  const menuLinks = document.querySelectorAll('.menu a');
+  
+  menuLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+}
+
+// Call this function on each page load
+document.addEventListener('DOMContentLoaded', function() {
+  updateMenuLinks();
+});
