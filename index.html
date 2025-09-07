@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="az">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LinQva - Sadə Nümunə Sayt</title>
+  <meta name="description" content="HTML / CSS / JS sadə nümunə sayt" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="brand">
+      <span class="logo" aria-hidden="true"></span>
+      <span>LinQva</span>
+    </div>
+
+    <div class="menu" id="menu">
+      <a href="#features">Xüsusiyyətlər</a>
+      <a href="#pricing">Qiymətlər</a>
+      <a href="#contact">Əlaqə</a>
+      <a class="cta" href="#">Qaydalar</a>
+    </div>
+
+    <button id="menuToggle" aria-expanded="false">
+      <i class="fas fa-bars"></i>
+    </button>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <h1>Sadə, təmiz və sürətli veb-sayt nümunəsi</h1>
+      <p>Bu nümunə səhifə HTML, CSS və JavaScript-in əsas funksiyalarını göstərir. Nümunəni kopyalayıb yapışdırın, öz tələblərinizə uyğun redaktə edin.</p>
+
+      <div class="features">
+        <div class="card">
+          <strong>Responsiv dizayn</strong>
+          <div style="color:var(--muted);font-size:14px">Mobil və masaüstü üçün hazırlanmış gridlər.</div>
+        </div>
+
+        <div class="card">
+          <strong>İnteqrasiya olunmuş JS</strong>
+          <div style="color:var(--muted);font-size:14px">Sadə menyu, forma yoxlaması və dinamik davranış.</div>
+        </div>
+
+        <div class="card">
+          <strong>Soft UI</strong>
+          <div style="color:var(--muted);font-size:14px">Təmiz kölgələr və yumşaq radiuslar.</div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="preview card">
+      <h3>Mini preview</h3>
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='300'><rect width='100%' height='100%' fill='%23eef2ff'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%234f46e5' font-family='Arial' font-size='24'>Sayt Preview</text></svg>" alt="preview" />
+      <p style="color:var(--muted);font-size:13px;margin-top:8px">Sadə təqdimat</p>
+    </aside>
+  </header>
+
+  <main>
+    <section class="grid" id="features">
+      <article class="card">
+        <div style="font-size:24px;color:var(--accent);margin-bottom:10px;"><i class="fas fa-cubes"></i></div>
+        <h4>Komponentlər</h4>
+        <p style="color:var(--muted);font-size:14px">Kartlar, grid, forma elementləri və reaktiv menyu burada göstərilib.</p>
+      </article>
+
+      <article class="card">
+        <div style="font-size:24px;color:var(--accent);margin-bottom:10px;"><i class="fas fa-bolt"></i></div>
+        <h4>Yüngül Animasiya</h4>
+        <p style="color:var(--muted);font-size:14px">Hover effektləri və kölgələr UX üçün kifayətdir.</p>
+      </article>
+
+      <article class="card">
+        <div style="font-size:24px;color:var(--accent);margin-bottom:10px;"><i class="fas fa-search"></i></div>
+        <h4>Sadə SEO</h4>
+        <p style="color:var(--muted);font-size:14px">Təmiz HTML struktur, başlıqlar və meta etiketlər.</p>
+      </article>
+
+      <article class="card">
+        <div style="font-size:24px;color:var(--accent);margin-bottom:10px;"><i class="fas fa-expand-arrows-alt"></i></div>
+        <h4>Asan genişləndirmə</h4>
+        <p style="color:var(--muted);font-size:14px">Bu şablonu istədiyiniz CMS və ya backend ilə genişləndirə bilərsiniz.</p>
+      </article>
+    </section>
+
+    <section class="contact card" id="contact">
+      <h3>Bizimlə əlaqə</h3>
+      <p style="color:var(--muted);font-size:14px">Aşağıdakı formu doldurun, demo üçün əlaqə saxlayarıq.</p>
+
+      <form id="contactForm">
+        <div class="form-row">
+          <input type="text" id="name" placeholder="Adınız" required />
+          <input type="email" id="email" placeholder="E-poçt" required />
+        </div>
+        <div style="margin-bottom:16px">
+          <textarea id="message" rows="4" placeholder="Mesajınız" required></textarea>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center">
+          <button type="submit">Göndər</button>
+          <div id="formStatus" style="color:var(--muted);font-size:14px"></div>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div style="max-width:1100px;margin:0 auto;padding:8px">
+      © 2025 LinQva — Bütün hüquqlar qorunur
+      <div class="social-links">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
